@@ -188,7 +188,114 @@
             font-size: 0.9em;
         }
 
-        @media (max-width: 768px) {
+        .rating-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 3px solid #ecf0f1;
+            transition: transform 0.3s;
+        }
+
+        .rating-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+
+        .card-game-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .card-overall {
+            font-size: 2em;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-ratings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .card-rating-item {
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+
+        .card-rating-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .card-rating-label {
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+
+        .view-toggle {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .toggle-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+
+        .toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .toggle-btn.active {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+        }
+
+        .cards-view {
+            display: none;
+        }
+
+        .table-view {
+            display: block;
+        }
             .container { padding: 15px; }
             h1 { font-size: 2em; }
             .stats { gap: 15px; }
@@ -224,17 +331,23 @@
             <input type="text" class="search-box" placeholder="Søg efter spil..." id="searchBox">
         </div>
 
-        <div class="table-container">
-            <table id="ratingsTable">
+        <div class="view-toggle">
+            <button class="toggle-btn active" onclick="toggleView('table')">Tabel Visning</button>
+            <button class="toggle-btn" onclick="toggleView('cards')">Kort Visning</button>
+        </div>
+
+        <div class="table-view" id="tableView">
+            <div class="table-container">
+                <table id="ratingsTable">
                 <thead>
                     <tr>
                         <th onclick="sortTable(0)">Spil</th>
-                        <th onclick="sortTable(1)">Epicness</th>
-                        <th onclick="sortTable(2)">Cool Factor</th>
-                        <th onclick="sortTable(3)">Frustration</th>
-                        <th onclick="sortTable(4)">Nostalgia</th>
-                        <th onclick="sortTable(5)">Leet Level</th>
-                        <th onclick="sortTable(6)">Overall</th>
+                        <th onclick="sortTable(1)" title="Hvor episke var høje øjeblikke? (1-10)">Epicness ⓘ</th>
+                        <th onclick="sortTable(2)" title="Stil, innovation og wow-faktor (1-10)">Cool Factor ⓘ</th>
+                        <th onclick="sortTable(3)" title="Hvor frustrerende var spillet? (1-10)">Frustration ⓘ</th>
+                        <th onclick="sortTable(4)" title="Hvor meget påvirker nostalgi min bedømmelse? (1-10)">Nostalgia ⓘ</th>
+                        <th onclick="sortTable(5)" title="Skill ceiling og kompetitiv dybde (1-10)">Leet Level ⓘ</th>
+                        <th onclick="sortTable(6)" title="Min samlede bedømmelse (1-10)">Overall</th>
                         <th onclick="sortTable(7)">Episode</th>
                         <th onclick="sortTable(8)">Dato</th>
                     </tr>
@@ -275,6 +388,108 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+        </div>
+
+        <div class="cards-view" id="cardsView">
+            <div class="rating-card">
+                <div class="card-header">
+                    <div class="card-game-title">The Witcher 3: Wild Hunt</div>
+                    <div class="card-overall">8.5</div>
+                </div>
+                <div class="card-ratings">
+                    <div class="card-rating-item">
+                        <div class="card-rating-value rating-epic">9</div>
+                        <div class="card-rating-label">Epicness</div>
+                    </div>
+                    <div class="card-rating-item">
+                        <div class="card-rating-value rating-cool">8</div>
+                        <div class="card-rating-label">Cool Factor</div>
+                    </div>
+                    <div class="card-rating-item">
+                        <div class="card-rating-value rating-frustration">6</div>
+                        <div class="card-rating-label">Frustration</div>
+                    </div>
+                    <div class="card-rating-item">
+                        <div class="card-rating-value rating-nostalgia">7</div>
+                        <div class="card-rating-label">Nostalgia</div>
+                    </div>
+                    <div class="card-rating-item">
+                        <div class="card-rating-value rating-leet">8</div>
+                        <div class="card-rating-label">Leet Level</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span>Episode: <a href="#" class="episode-link">EP001</a></span>
+                    <span>21/09/2025</span>
+                </div>
+            </div>
+
+            <div class="rating-card">
+                <div class="card-header">
+                    <div class="card-game-title">Cyberpunk 2077</div>
+                    <div class="card-overall">7.0</div>
+                </div>
+                <div class="card-ratings">
+                    <div class="card-rating-item">
+                        <div class="card-rating-value rating-epic">7</div>
+                        <div class="card-rating-label">Epicness</div>
+                    </div>
+                    <div class="card-rating-item">
+                        <div class="card-rating-value rating-cool">9</div>
+                        <div class="card-rating-label">Cool Factor</div>
+                    </div>
+                    <div class="card-rating-item">
+                        <div class="card-rating-value rating-frustration">8</div>
+                        <div class="card-rating-label">Frustration</div>
+                    </div>
+                    <div class="card-rating-item">
+                        <div class="card-rating-value rating-nostalgia">5</div>
+                        <div class="card-rating-label">Nostalgia</div>
+                    </div>
+                    <div class="card-rating-item">
+                        <div class="card-rating-value rating-leet">6</div>
+                        <div class="card-rating-label">Leet Level</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span>Episode: <a href="#" class="episode-link">EP002</a></span>
+                    <span>28/09/2025</span>
+                </div>
+            </div>
+
+            <div class="rating-card">
+                <div class="card-header">
+                    <div class="card-game-title">Hollow Knight</div>
+                    <div class="card-overall">8.0</div>
+                </div>
+                <div class="card-ratings">
+                    <div class="card-rating-item">
+                        <div class="card-rating-value rating-epic">8</div>
+                        <div class="card-rating-label">Epicness</div>
+                    </div>
+                    <div class="card-rating-item">
+                        <div class="card-rating-value rating-cool">8</div>
+                        <div class="card-rating-label">Cool Factor</div>
+                    </div>
+                    <div class="card-rating-item">
+                        <div class="card-rating-value rating-frustration">9</div>
+                        <div class="card-rating-label">Frustration</div>
+                    </div>
+                    <div class="card-rating-item">
+                        <div class="card-rating-value rating-nostalgia">6</div>
+                        <div class="card-rating-label">Nostalgia</div>
+                    </div>
+                    <div class="card-rating-item">
+                        <div class="card-rating-value rating-leet">9</div>
+                        <div class="card-rating-label">Leet Level</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span>Episode: <a href="#" class="episode-link">EP003</a></span>
+                    <span>05/10/2025</span>
+                </div>
+            </div>
         </div>
 
         <footer>
@@ -346,6 +561,25 @@
             
             const topRated = Math.max(...overallRatings);
             document.getElementById('topRated').textContent = topRated.toFixed(1);
+        }
+
+        // Skift mellem tabel og kort visning
+        function toggleView(viewType) {
+            const tableView = document.getElementById('tableView');
+            const cardsView = document.getElementById('cardsView');
+            const buttons = document.querySelectorAll('.toggle-btn');
+            
+            if (viewType === 'table') {
+                tableView.style.display = 'block';
+                cardsView.style.display = 'none';
+                buttons[0].classList.add('active');
+                buttons[1].classList.remove('active');
+            } else {
+                tableView.style.display = 'none';
+                cardsView.style.display = 'block';
+                buttons[1].classList.add('active');
+                buttons[0].classList.remove('active');
+            }
         }
 
         // Kald updateStats ved load
