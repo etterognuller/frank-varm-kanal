@@ -156,7 +156,7 @@
 
         .rating-epic { color: #e74c3c; }
         .rating-cool { color: #3498db; }
-        .rating-frustration { color: #f39c12; }
+        .rating-gamefeel { color: #27ae60; }
         .rating-nostalgia { color: #9b59b6; }
         .rating-leet { color: #2ecc71; }
         .rating-overall { color: #34495e; background: #ecf0f1; border-radius: 5px; }
@@ -317,11 +317,11 @@
                     <div class="stat-label">Spil anmeldt</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" id="avgRating">7.3</div>
+                    <div class="stat-number" id="avgRating">32.3</div>
                     <div class="stat-label">Gennemsnit</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" id="topRated">8.5</div>
+                    <div class="stat-number" id="topRated">36</div>
                     <div class="stat-label">Højeste rating</div>
                 </div>
             </div>
@@ -342,12 +342,12 @@
                 <thead>
                     <tr>
                         <th onclick="sortTable(0)">Spil</th>
-                        <th onclick="sortTable(1)" title="Hvor episke var høje øjeblikke? (1-10)">Epicness ⓘ</th>
-                        <th onclick="sortTable(2)" title="Stil, innovation og wow-faktor (1-10)">Cool Factor ⓘ</th>
-                        <th onclick="sortTable(3)" title="Hvor frustrerende var spillet? (1-10)">Frustration ⓘ</th>
-                        <th onclick="sortTable(4)" title="Hvor meget påvirker nostalgi min bedømmelse? (1-10)">Nostalgia ⓘ</th>
-                        <th onclick="sortTable(5)" title="Skill ceiling og kompetitiv dybde (1-10)">Leet Level ⓘ</th>
-                        <th onclick="sortTable(6)" title="Min samlede bedømmelse (1-10)">Overall</th>
+                        <th onclick="sortTable(1)" title="Hvor EPIC er spillet? Føles det legendarisk at spille, er der mange øjeblikke hvor følelserne går højt, mens man sidder og bliver revet med?">Epicness ⓘ</th>
+                        <th onclick="sortTable(2)" title="Hvor sejt er spillet? Hvor sejt er det at spille? Hvordan er spillet at spille - innovativt, stilet eller lavet på en måde hvor man taber kæben? Med andre ord... er spillet cool?">Cool Factor ⓘ</th>
+                        <th onclick="sortTable(3)" title="Hvor godt føles spillet at spille? Er det responsivt, poleret og behageligt at styre? Eller er der ting der ødelægger game feel'et som bugs, sindssyge sværhedsgrads-spikes, dårligt design, kluntet kontrol eller spil der er strukket for langt? Jo bedre game feel, jo højere score.">Game Feel ⓘ</th>
+                        <th onclick="sortTable(4)" title="Hvor nostalgisk føles spillet samt er der et nostalgi bias? Spil kan føles som hjem, men det kan også være fordi man er vokset op med dem. Hvor høj en grad af nostalgi kan spillet påvirke en med?">Nostalgi Bias ⓘ</th>
+                        <th onclick="sortTable(5)" title="Hvor 1337 er spillet? Er det et spil med et højt skill-ceiling, der gør at spillet måske ikke er for alle - eller er der en mestringskurve, der gør det monster sejt at spille, des længere man spiller det?">1337 LVL ⓘ</th>
+                        <th onclick="sortTable(6)" title="Sum af alle ratings (max 50 points)">Overall</th>
                         <th onclick="sortTable(7)">Episode</th>
                         <th onclick="sortTable(8)">Dato</th>
                     </tr>
@@ -357,10 +357,10 @@
                         <td class="game-title">The Witcher 3: Wild Hunt</td>
                         <td class="rating-cell rating-epic">9</td>
                         <td class="rating-cell rating-cool">8</td>
-                        <td class="rating-cell rating-frustration">6</td>
+                        <td class="rating-cell rating-gamefeel">4</td>
                         <td class="rating-cell rating-nostalgia">7</td>
                         <td class="rating-cell rating-leet">8</td>
-                        <td class="rating-cell rating-overall">8.5</td>
+                        <td class="rating-cell rating-overall">36</td>
                         <td><a href="#" class="episode-link">EP001</a></td>
                         <td class="date-cell">21/09/2025</td>
                     </tr>
@@ -368,10 +368,10 @@
                         <td class="game-title">Cyberpunk 2077</td>
                         <td class="rating-cell rating-epic">7</td>
                         <td class="rating-cell rating-cool">9</td>
-                        <td class="rating-cell rating-frustration">8</td>
+                        <td class="rating-cell rating-gamefeel">2</td>
                         <td class="rating-cell rating-nostalgia">5</td>
                         <td class="rating-cell rating-leet">6</td>
-                        <td class="rating-cell rating-overall">7.0</td>
+                        <td class="rating-cell rating-overall">29</td>
                         <td><a href="#" class="episode-link">EP002</a></td>
                         <td class="date-cell">28/09/2025</td>
                     </tr>
@@ -379,10 +379,10 @@
                         <td class="game-title">Hollow Knight</td>
                         <td class="rating-cell rating-epic">8</td>
                         <td class="rating-cell rating-cool">8</td>
-                        <td class="rating-cell rating-frustration">9</td>
+                        <td class="rating-cell rating-gamefeel">1</td>
                         <td class="rating-cell rating-nostalgia">6</td>
                         <td class="rating-cell rating-leet">9</td>
-                        <td class="rating-cell rating-overall">8.0</td>
+                        <td class="rating-cell rating-overall">32</td>
                         <td><a href="#" class="episode-link">EP003</a></td>
                         <td class="date-cell">05/10/2025</td>
                     </tr>
@@ -395,7 +395,7 @@
             <div class="rating-card">
                 <div class="card-header">
                     <div class="card-game-title">The Witcher 3: Wild Hunt</div>
-                    <div class="card-overall">8.5</div>
+                    <div class="card-overall">38</div>
                 </div>
                 <div class="card-ratings">
                     <div class="card-rating-item">
@@ -412,11 +412,11 @@
                     </div>
                     <div class="card-rating-item">
                         <div class="card-rating-value rating-nostalgia">7</div>
-                        <div class="card-rating-label">Nostalgia</div>
+                        <div class="card-rating-label">Nostalgi Bias</div>
                     </div>
                     <div class="card-rating-item">
                         <div class="card-rating-value rating-leet">8</div>
-                        <div class="card-rating-label">Leet Level</div>
+                        <div class="card-rating-label">1337 LVL</div>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -428,7 +428,7 @@
             <div class="rating-card">
                 <div class="card-header">
                     <div class="card-game-title">Cyberpunk 2077</div>
-                    <div class="card-overall">7.0</div>
+                    <div class="card-overall">35</div>
                 </div>
                 <div class="card-ratings">
                     <div class="card-rating-item">
@@ -445,11 +445,11 @@
                     </div>
                     <div class="card-rating-item">
                         <div class="card-rating-value rating-nostalgia">5</div>
-                        <div class="card-rating-label">Nostalgia</div>
+                        <div class="card-rating-label">Nostalgi Bias</div>
                     </div>
                     <div class="card-rating-item">
                         <div class="card-rating-value rating-leet">6</div>
-                        <div class="card-rating-label">Leet Level</div>
+                        <div class="card-rating-label">1337 LVL</div>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -461,7 +461,7 @@
             <div class="rating-card">
                 <div class="card-header">
                     <div class="card-game-title">Hollow Knight</div>
-                    <div class="card-overall">8.0</div>
+                    <div class="card-overall">40</div>
                 </div>
                 <div class="card-ratings">
                     <div class="card-rating-item">
@@ -478,11 +478,11 @@
                     </div>
                     <div class="card-rating-item">
                         <div class="card-rating-value rating-nostalgia">6</div>
-                        <div class="card-rating-label">Nostalgia</div>
+                        <div class="card-rating-label">Nostalgi Bias</div>
                     </div>
                     <div class="card-rating-item">
                         <div class="card-rating-value rating-leet">9</div>
-                        <div class="card-rating-label">Leet Level</div>
+                        <div class="card-rating-label">1337 LVL</div>
                     </div>
                 </div>
                 <div class="card-footer">
