@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Podcast - Spil Ratings</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .search-box {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            width: 300px;
+            max-width: 100%;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-box:focus {
+            border-color: #667eea;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            position: relative;
+        }
+
+        th:hover {
+            background: linear-gradient(135deg, #5a6fd8, #6a4190);
+        }
+
+        th::after {
+            content: '↕';
+            position: absolute;
+            right: 5px;
+            opacity: 0.7;
+            font-size: 12px;
+        }
+
+        td {
+            padding: 12px 10px;
+            text-align: center;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover {
+            background-color: #e8f4fd;
+            transform: scale(1.01);
+            transition: all 0.2s;
+        }
+
+        .game-title {
+            font-weight: bold;
+            text-align: left;
+            max-width: 200px;
+        }
+
+        .rating-cell {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .rating-epic { color: #e74c3c; }
+        .rating-cool { color: #3498db; }
+        .rating-frustration { color: #f39c12; }
+        .rating-nostalgia { color: #9b59b6; }
+        .rating-leet { color: #2ecc71; }
+        .rating-overall { color: #34495e; background: #ecf0f1; border-radius: 5px; }
+
+        .episode-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 15px;
+            background: rgba(102, 126, 234, 0.1);
+            transition: all 0.3s;
+        }
+
+        .episode-link:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .date-cell {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            h1 { font-size: 2em; }
+            .stats { gap: 15px; }
+            .stat-card { min-width: 100px; padding: 10px 15px; }
+            th, td { padding: 8px 5px; font-size: 0.9em; }
+            .search-box { width: 250px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Gaming Podcast Ratings</h1>
+            <p class="subtitle">Komplet oversigt over alle anmeldte spil</p>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalGames">3</div>
+                    <div class="stat-label">Spil anmeldt</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="avgRating">7.3</div>
+                    <div class="stat-label">Gennemsnit</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="topRated">8.5</div>
+                    <div class="stat-label">Højeste rating</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Søg efter spil..." id="searchBox">
+        </div>
+
+        <div class="table-container">
+            <table id="ratingsTable">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">Spil</th>
+                        <th onclick="sortTable(1)">Epicness</th>
+                        <th onclick="sortTable(2)">Cool Factor</th>
+                        <th onclick="sortTable(3)">Frustration</th>
+                        <th onclick="sortTable(4)">Nostalgia</th>
+                        <th onclick="sortTable(5)">Leet Level</th>
+                        <th onclick="sortTable(6)">Overall</th>
+                        <th onclick="sortTable(7)">Episode</th>
+                        <th onclick="sortTable(8)">Dato</th>
+                    </tr>
+                </thead>
+                <tbody id="ratingsBody">
+                    <tr>
+                        <td class="game-title">The Witcher 3: Wild Hunt</td>
+                        <td class="rating-cell rating-epic">9</td>
+                        <td class="rating-cell rating-cool">8</td>
+                        <td class="rating-cell rating-frustration">6</td>
+                        <td class="rating-cell rating-nostalgia">7</td>
+                        <td class="rating-cell rating-leet">8</td>
+                        <td class="rating-cell rating-overall">8.5</td>
+                        <td><a href="#" class="episode-link">EP001</a></td>
+                        <td class="date-cell">21/09/2025</td>
+                    </tr>
+                    <tr>
+                        <td class="game-title">Cyberpunk 2077</td>
+                        <td class="rating-cell rating-epic">7</td>
+                        <td class="rating-cell rating-cool">9</td>
+                        <td class="rating-cell rating-frustration">8</td>
+                        <td class="rating-cell rating-nostalgia">5</td>
+                        <td class="rating-cell rating-leet">6</td>
+                        <td class="rating-cell rating-overall">7.0</td>
+                        <td><a href="#" class="episode-link">EP002</a></td>
+                        <td class="date-cell">28/09/2025</td>
+                    </tr>
+                    <tr>
+                        <td class="game-title">Hollow Knight</td>
+                        <td class="rating-cell rating-epic">8</td>
+                        <td class="rating-cell rating-cool">8</td>
+                        <td class="rating-cell rating-frustration">9</td>
+                        <td class="rating-cell rating-nostalgia">6</td>
+                        <td class="rating-cell rating-leet">9</td>
+                        <td class="rating-cell rating-overall">8.0</td>
+                        <td><a href="#" class="episode-link">EP003</a></td>
+                        <td class="date-cell">05/10/2025</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p>Sidst opdateret: <span id="lastUpdated">21. september 2025</span></p>
+            <p>🎧 Find alle episoder på [Din Podcast Platform]</p>
+        </footer>
+    </div>
+
+    <script>
+        // Søgefunktion
+        document.getElementById('searchBox').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#ratingsBody tr');
+            
+            rows.forEach(row => {
+                const gameTitle = row.querySelector('.game-title').textContent.toLowerCase();
+                if (gameTitle.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Sorteringsfunktion
+        let sortDirection = {};
+        
+        function sortTable(columnIndex) {
+            const table = document.getElementById('ratingsTable');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            
+            // Toggle sort direction
+            sortDirection[columnIndex] = !sortDirection[columnIndex];
+            
+            rows.sort((a, b) => {
+                const aValue = a.cells[columnIndex].textContent.trim();
+                const bValue = b.cells[columnIndex].textContent.trim();
+                
+                // Check if values are numbers
+                const aNum = parseFloat(aValue);
+                const bNum = parseFloat(bValue);
+                
+                let comparison = 0;
+                if (!isNaN(aNum) && !isNaN(bNum)) {
+                    comparison = aNum - bNum;
+                } else {
+                    comparison = aValue.localeCompare(bValue);
+                }
+                
+                return sortDirection[columnIndex] ? comparison : -comparison;
+            });
+            
+            // Re-append sorted rows
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        // Opdater statistikker (kan automatiseres)
+        function updateStats() {
+            const rows = document.querySelectorAll('#ratingsBody tr');
+            const overallRatings = Array.from(rows).map(row => 
+                parseFloat(row.cells[6].textContent)
+            );
+            
+            document.getElementById('totalGames').textContent = rows.length;
+            
+            const avgRating = overallRatings.reduce((a, b) => a + b, 0) / overallRatings.length;
+            document.getElementById('avgRating').textContent = avgRating.toFixed(1);
+            
+            const topRated = Math.max(...overallRatings);
+            document.getElementById('topRated').textContent = topRated.toFixed(1);
+        }
+
+        // Kald updateStats ved load
+        updateStats();
+    </script>
+</body>
+</html>
